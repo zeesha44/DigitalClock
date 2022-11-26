@@ -1,18 +1,19 @@
 package digital_clock;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
+//import java.awt.FlowLayout;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+//import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,10 @@ import javax.swing.JPanel;
 
 public class MyFrame extends JFrame implements ActionListener {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Calendar calendar;
 	SimpleDateFormat timeFormat;
 	JLabel timeLabel;
@@ -41,22 +46,26 @@ public class MyFrame extends JFrame implements ActionListener {
 	
 	MyFrame(){
 		
-//		JPanel p1 = new JPanel();
-//		p1.setBackground(Color.red);
-//		p1.setBounds(0,0,200,200);
-//		
-//		JPanel p2 = new JPanel();
-//		p2.setBackground(Color.blue);
-//		p2.setBounds(250,0,200,200);
-//		
-//		JPanel p3 = new JPanel();
-//		p3.setBackground(Color.green);
-//		p3.setBounds(0,250,250,250);
+		JPanel p1 = new JPanel();
+		//p1.setBackground(Color.red);
+		p1.setBounds(0,0,500,75);
+		
+		JPanel p2 = new JPanel();
+		p2.setBackground(Color.white);
+		p2.setBounds(0,75,500,75);
+		
+		JPanel p3 = new JPanel();
+	//	p3.setBackground(Color.green);
+		p3.setBounds(0,150,500,65);
+		
+		JPanel p4 = new JPanel();
+		p4.setBackground(Color.white);
+		p4.setBounds(0,215,500,75);
 		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("My Digital Clock Project");
-		this.setLayout(new FlowLayout());
+		this.setLayout(null);
 		this.setSize(500,300);
 		this.setResizable(false);
 		//this.setUndecorated(true);
@@ -80,34 +89,44 @@ public class MyFrame extends JFrame implements ActionListener {
 		location = new JLabel("<html> <br>Lagos<br></html>");
 		location.setFont(new Font("Agency FB", Font.PLAIN, 20));
 		timeLabel.setFont(new Font("Agency FB", Font.BOLD, 35));
+		timeLabel.setBorder(BorderFactory.createBevelBorder(1));
+		timeLabel.setOpaque(true);
+		
+		
 		
 		timeLabel2 = new JLabel();
 		location2 = new JLabel("<html> <br>New York<br> </html>");
 		location2.setFont(new Font("Agency FB", Font.PLAIN, 20));
 		timeLabel2.setFont(new Font("Agency FB", Font.BOLD, 35));
+		timeLabel2.setBorder(BorderFactory.createBevelBorder(1));
+		timeLabel2.setOpaque(true);
+		timeLabel2.setBackground(Color.WHITE);
 		
 		timeLabel3 = new JLabel();
 		location3 = new JLabel("Berlin");
 		location3.setFont(new Font("Agency FB", Font.PLAIN, 20));
 		timeLabel3.setFont(new Font("Agency FB", Font.BOLD, 35));
+		timeLabel3.setBorder(BorderFactory.createBevelBorder(1));
+		timeLabel3.setOpaque(true);
 		
 		
-//		this.add(p1);
-//		this.add(p2);
-//		this.add(p3);
-		this.add(location);
-		this.add(timeLabel);
+		this.add(p1);
+		this.add(p2);
+		this.add(p3);
+		this.add(p4);
+		p1.add(location);
+		p1.add(timeLabel);
+//		
+//		//this.add(nl);
+//		
+		p2.add(location2);
+		p2.add(timeLabel2);
 		
-		//this.add(nl);
-		
-		this.add(location2);
-		this.add(timeLabel2);
-		
-		this.add(location3);
-		this.add(timeLabel3);
-		
-		this.add(myb);
-		this.add(myb2);
+		p3.add(location3);
+		p3.add(timeLabel3);
+//		
+		p4.add(myb);
+		p4.add(myb2);
 		
 		this.setVisible(true);
 		

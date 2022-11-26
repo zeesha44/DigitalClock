@@ -9,10 +9,12 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.time.Duration;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class TimerC extends JFrame implements ActionListener {
@@ -28,16 +30,40 @@ long inputtime, lastticktime, runningtime, timeLeft;
 
 JLabel labeltime, h, min, sec;
 JComboBox<String> hourComboBox, minutesComboBox, secondsComboBox;
-JButton  reset, start, pause;
+//JButton  reset, start, pause;
+
+JButton start = new JButton("START");
+JButton reset = new JButton("RESET");
+JButton pause = new JButton("PAUSE");
 
 Timer timer;
 
 	
 	TimerC(){
+		JPanel p1 = new JPanel();
+		//p1.setBackground(Color.red);
+		p1.setBounds(0,0,500,75);
+		frame.add(p1);
+		
+		JPanel p2 = new JPanel();
+		p2.setBackground(Color.white);
+		p2.setBounds(0,75,500,75);
+		frame.add(p2);
+		
+		JPanel p3 = new JPanel();
+		//p3.setBackground(Color.green);
+		p3.setBounds(0,150,500,55);
+		frame.add(p3);
+		
+		JPanel p4 = new JPanel();
+		p4.setBackground(Color.white);
+		p4.setBounds(0,205,500,85);
+		frame.add(p4);
+		
 		hours = minutes = seconds = 0;
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("My Digital Clock Project");
-		frame.setLayout(new FlowLayout());
+		frame.setLayout(null);
 		frame.setSize(500,300);
 		frame.setResizable(false);
 		//frame.setUndecorated(true);
@@ -46,9 +72,11 @@ Timer timer;
 		
 		labeltime = new JLabel();
 		changeLabelTimer();
-		labeltime.setBounds(300,400,200,100);
+		//labeltime.setBounds(300,400,200,100);
+//		labeltime.setBorder(BorderFactory.createBevelBorder(1));
+//		labeltime.setOpaque(true);
 		labeltime.setFont(new Font ("Agency FB", Font.BOLD, 50));
-		frame.add(labeltime);
+		p1.add(labeltime);
 		
 		hourComboBox = new JComboBox<String>();
 		for(int i = 0; i <= 24; i++) {
@@ -57,8 +85,9 @@ Timer timer;
 		hourComboBox.setBounds(300,400,200,100);
 		hourComboBox.addActionListener(this);
 		hourComboBox.setFont(new Font ("Agency FB", Font.BOLD, 50));
+		hourComboBox.setBackground(Color.white);
 		((JLabel) hourComboBox.getRenderer()).setHorizontalAlignment(JLabel.CENTER);        //center aligning the combobox text, renderer is necessary for aligning the text in combobox
-		frame.add(hourComboBox);
+		p2.add(hourComboBox);
 		
 		minutesComboBox = new JComboBox<String>();				//combobox to choose minutes
 		for(int i = 0; i < 60; i++) {							//filling values
@@ -67,52 +96,54 @@ Timer timer;
 		minutesComboBox.setBounds(300,400,200,100);
 		minutesComboBox.addActionListener(this);
 		minutesComboBox.setFont(new Font ("Agency FB", Font.BOLD, 50));
+		minutesComboBox.setBackground(Color.white);
 		((JLabel) minutesComboBox.getRenderer()).setHorizontalAlignment(JLabel.CENTER);      //center aligning the combobox text, renderer is necessary for aligning the text in combobox
-		frame.add(minutesComboBox);
+		p2.add(minutesComboBox);
 		
 		
 		secondsComboBox = new JComboBox<String>();				//combobox to choose seconds
 		for(int i = 0; i < 60; i++) {							//filling values
 			secondsComboBox.addItem(formatter.format(i));
 		}
-		secondsComboBox.setBounds(300,400,200,100);
+		//secondsComboBox.setBounds(300,400,200,100);
 		secondsComboBox.addActionListener(this);
 		secondsComboBox.setFont(new Font ("Agency FB", Font.BOLD, 50));
+		secondsComboBox.setBackground(Color.white);
 		((JLabel) secondsComboBox.getRenderer()).setHorizontalAlignment(JLabel.CENTER);			//center aligning the combobox text, renderer is necessary for aligning the text in combobox
-		frame.add(secondsComboBox);
+		p2.add(secondsComboBox);
 		
-		h = new JLabel("h");
-		h.setBounds(300,400,200,100);
-		h.setFont(new Font ("Agency FB", Font.BOLD, 20));
-		frame.add(h);
+		h = new JLabel("H");
+		h.setBounds(20,150,200,100);
+		h.setFont(new Font ("Agency FB", Font.BOLD, 30));
+		p3.add(h);
 		
-		min = new JLabel("min");
-		min.setBounds(300,400,200,100);
-		min.setFont(new Font ("Agency FB", Font.BOLD, 20));
-		frame.add(min);
+		min = new JLabel("       Min");
+		//min.setBounds(300,400,200,100);
+		min.setFont(new Font ("Agency FB", Font.BOLD, 30));
+		p3.add(min);
 		
-		sec = new JLabel("sec");
-		sec.setBounds(300,400,200,100);
-		sec.setFont(new Font ("Agency FB", Font.BOLD, 20));
-		frame.add(sec);
+		sec = new JLabel("       Sec");
+		//sec.setBounds(300,400,200,100);
+		sec.setFont(new Font ("Agency FB", Font.BOLD, 30));
+		p3.add(sec);
 		
 		start.setBounds(100,300,100,50);
 		start.setFont(new Font ("Agency FB", Font.PLAIN, 20));
 		start.setFocusable(false);
 		start.addActionListener(this);
-		frame.add(start);
+		p4.add(start);
 		
 		reset.setBounds(200,300,100,50);
 		reset.setFont(new Font ("Agency FB", Font.PLAIN, 20));
 		reset.setFocusable(false);
 		reset.addActionListener(this);
-		frame.add(reset);
+		p4.add(reset);
 		
 		pause.setBounds(200,300,100,50);
 		pause.setFont(new Font ("Agency FB", Font.PLAIN, 20));
 		pause.setFocusable(false);
 		pause.addActionListener(this);
-		frame.add(pause);
+		p4.add(pause);
 		
 //		back.setBounds(200,300,100,50);
 //		back.setFont(new Font ("Agency FB", Font.PLAIN, 20));

@@ -7,10 +7,14 @@ import javax.swing.*;
 //import javax.swing.JLabel;
 
 public class StopWatch extends JFrame implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFrame frame = new JFrame();
 	JButton startb = new JButton("START");
 	JButton resetb = new JButton("RESET");
-	JButton back = new JButton("BACK");
+	//JButton back = new JButton("BACK");
 	
 	JLabel timelabel = new JLabel();
 	int elapsed = 0;
@@ -42,12 +46,27 @@ public class StopWatch extends JFrame implements ActionListener {
 	
 	StopWatch(){
 		
+		JPanel p1 = new JPanel();
+		p1.setBackground(Color.white);
+		p1.setBounds(0,25,500,125);
+		
+		JPanel p2 = new JPanel();
+		p2.setBackground(Color.white);
+		p2.setBounds(0,150,500,150);
+		
+		JPanel p3 = new JPanel();
+		p3.setBackground(Color.white);
+		p3.setBounds(0,0,500,25);
+		
+		
 		timelabel.setText(hours + ":" + minute + ":" + seconds);
 		timelabel.setBounds(300,400,200,100);
 		timelabel.setFont(new Font ("Agency FB", Font.BOLD, 50));
 		timelabel.setBorder(BorderFactory.createBevelBorder(1));
 		timelabel.setOpaque(true);
-		timelabel.setHorizontalAlignment(JTextField.CENTER);
+		timelabel.setBackground(Color.white);
+		//timelabel.setHorizontalAlignment(JTextField.CENTER);
+		
 		
 		startb.setBounds(100,300,100,50);
 		startb.setFont(new Font ("Agency FB", Font.PLAIN, 20));
@@ -59,19 +78,25 @@ public class StopWatch extends JFrame implements ActionListener {
 		resetb.setFocusable(false);
 		resetb.addActionListener(this);
 		
-		back.setBounds(200,300,100,50);
-		back.setFont(new Font ("Agency FB", Font.PLAIN, 20));
-		back.setFocusable(false);
-		back.addActionListener(this);
 		
+		
+//		back.setBounds(200,300,100,50);
+//		back.setFont(new Font ("Agency FB", Font.PLAIN, 20));
+//		back.setFocusable(false);
+//		back.addActionListener(this);
+
+		frame.add(p1);
+		frame.add(p2);
+		frame.add(p3);
 		frame.add(timelabel);
 		frame.add(startb);
 		frame.add(resetb);
-		frame.add(back);
-		
+		p1.add(timelabel);
+		p2.add(startb);
+		p2.add(resetb);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("My Digital Clock Project");
-		frame.setLayout(new FlowLayout());
+		frame.setLayout(null);
 		frame.setSize(500,300);
 		frame.setResizable(false);
 		//this.setUndecorated(true);
@@ -102,10 +127,10 @@ public class StopWatch extends JFrame implements ActionListener {
 			reset();
 		}
 		
-		if(e.getSource()==back) {
-			this.dispose();
-			Main m = new Main();
-		}
+//		if(e.getSource()==back) {
+//			this.dispose();
+//			Main m = new Main();
+//		}
 	}
 	
 	void start() {
